@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受付情報</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
+        img { max-width: 200px; margin: 10px; }
+        .info { font-size: 20px; margin: 10px; }
+    </style>
+</head>
+<body>
+
+    <h2>こちらの画面をスタッフに提示してください</h2>
+    
+    <img id="shopLogo" src="" alt="店舗ロゴ">
+    
+    <p class="info"><strong>受付番号:</strong> <span id="number"></span></p>
+    <p class="info"><strong>代表者名:</strong> <span id="name"></span> 様</p>
+    <p class="info"><strong>人数:</strong> <span id="people"></span> 名様</p>
+
+    <script>
+        function getQueryParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                shop: params.get("shop") || "",
+                number: params.get("number") || "",
+                name: params.get("name") || "",
+                people: params.get("people") || ""
+            };
+        }
+
+        const data = getQueryParams();
+        
+        document.getElementById("number").textContent = data.number;
+        document.getElementById("name").textContent = data.name;
+        document.getElementById("people").textContent = data.people;
+
+        // 店舗ロゴのマッピング
+        const shopLogos = {
+            "いろり家": "irori.png",
+            "四季彩": "shikishi.png",
+            "和咲美": "wasabi.png"
+        };
+
+        document.getElementById("shopLogo").src = shopLogos[data.shop] || "default.png";
+    </script>
+
+</body>
+</html>
